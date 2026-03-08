@@ -1,16 +1,37 @@
-# React + Vite
+# Elite Expense Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A personal finance desktop application built using **React + Electron**.
 
-Currently, two official plugins are available:
+Elite Expense Tracker helps track income, expenses, investments, and credit card dues in a clean and minimal dashboard.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+• Track daily expenses  
+• Manage cash and bank balances  
+• Monitor investments  
+• Credit card due tracking  
+• Financial health insights  
+• Works fully offline  
+• Private local data storage  
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+React  
+Electron  
+Vite  
+Chart.js  
+TailwindCSS  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Installation
+
+Download the latest installer from the **Releases** section.
+
+## Screenshots
+
+(Add screenshots here)
+
+## Developer
+
+Created by **Boobendiraa**
+
+Purpose: Personal finance management and productivity improvement.
