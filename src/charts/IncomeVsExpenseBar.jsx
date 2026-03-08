@@ -1,0 +1,124 @@
+import { memo, useMemo } from 'react'
+import {
+  BarElement,
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
+  Tooltip,
+} from 'chart.js'
+import { Bar } from 'react-chartjs-2'
+import { formatCurrency } from '../utils/formatters.js'
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend)
+
+const formatMonthLabel = (year, monthIndex) => {
+  const date = new Date(Number(year), Number(monthIndex) - 1, 1)
+  return date.toLocaleDateString('en-US', { month: 'short', year: '2-digit' })
+}
+
+const IncomeVsExpenseBar = ({ transactions }) => {
+  const { labels, income, expense } = useMemo(() => {
+    const totals = new Map()
+
+    transactions.forEach((t) => {
+      if (!t.date) return
+      const [year, month] = String(t.date).split('-')
+      if (!year || !month) return
+      const key = `${year}-${month}`
+      const current = totals.get(key) ?? { income: 0, expense: 0 }
+      const amt = Number(t.amount) || 0
+      if (t.type === 'income') current.income += amt
+      if (t.type === 'expense') current.expense += amt
+      totals.set(key, current)
+    })
+
+    const entries = Array.from(totals.entries()).sort((a, b) =>
+      a[0].localeCompare(b[0]),
+    )
+
+    const labels = entries.map(([key]) => {
+      const [year, month] = key.split('-')
+      return formatMonthLabel(year, month)
+    })
+
+    const income = entries.map(([, value]) => value.income)
+    const expense = entries.map(([, value]) => value.expense)
+
+    return { labels, income, expense }
+  }, [transactions])
+
+  if (!labels.length) {
+    return (
+      <div className="flex h-64 items-center justify-center">
+        <div className="h-24 w-40 rounded-xl bg-slate-800/60 animate-pulse" />
+      </div>
+    )
+  }
+
+  const chartData = {
+    labels,
+    datasets: [
+      {
+        label: 'Income',
+        data: income,
+        backgroundColor: '#22c55e',
+        borderRadius: 10,
+        barPercentage: 0.45,
+        categoryPercentage: 0.6,
+      },
+      {
+        label: 'Expenses',
+        data: expense,
+        backgroundColor: '#fb7185',
+        borderRadius: 10,
+        barPercentage: 0.45,
+        categoryPercentage: 0.6,
+      },
+    ],
+  }
+
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          color: '#e5e7eb',
+        },
+      },
+      tooltip: {
+        callbacks: {
+          label: (context) => {
+            const label = context.dataset.label || ''
+            const value = context.parsed.y || 0
+            return `${label}: ${formatCurrency(value)}`
+          },
+        },
+      },
+    },
+    scales: {
+      x: {
+        stacked: false,
+        ticks: { color: '#9ca3af' },
+        grid: { display: false },
+      },
+      y: {
+        stacked: false,
+        ticks: { color: '#6b7280', padding: 6 },
+        grid: { color: 'rgba(31,41,55,0.15)' },
+        border: { display: false },
+      },
+    },
+  }
+
+  return (
+    <div className="h-64">
+      <Bar data={chartData} options={options} />
+    </div>
+  )
+}
+
+export default memo(IncomeVsExpenseBar)
+

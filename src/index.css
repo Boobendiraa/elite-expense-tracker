@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes checkmark {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes dropdownIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-2px);
+}
+
+/* Dark theme only: deep navy, dark glass cards, teal accent, green positive, red negative */
+:root {
+  color-scheme: dark;
+  --background: #0f172a;
+  --card: rgba(30, 41, 59, 0.75);
+  --card-hover: rgba(51, 65, 85, 0.8);
+  --border: rgba(51, 65, 85, 0.6);
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --accent: #14b8a6;
+  --accent-muted: rgba(20, 184, 166, 0.2);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.success-check {
+  animation: checkmark 0.4s ease-out;
+}
+
+.loading-spinner {
+  animation: spin 0.8s linear infinite;
+}
+
+.dropdown-enter {
+  animation: dropdownIn 0.2s ease-out;
+}
+
+.card-glass {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+}
+.card-glass:hover {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.page-enter {
+  animation: fadeIn 0.2s ease-out;
+}

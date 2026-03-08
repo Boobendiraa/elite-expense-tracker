@@ -1,0 +1,18 @@
+{
+  "name": "Elite Expense Tracker",
+  "short_name": "Elite Tracker",
+  "description": "Personal finance dashboard - track expenses, investments, and goals",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#0f172a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
