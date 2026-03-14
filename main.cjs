@@ -14,6 +14,11 @@ function createWindow() {
   
 }
 
+function clearExpenses() {
+    localStorage.removeItem("expenses");
+    location.reload();
+}
+
 app.whenReady().then(createWindow);
 
 app.on("window-all-closed", () => {
